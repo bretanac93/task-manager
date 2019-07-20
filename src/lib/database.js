@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
-const connect = async (dbUrl) => {
+const connect = async (dbUrl, opts) => {
   if (!dbUrl) {
     throw new Error('Database url not defined');
   }
-  await mongoose.connect(dbUrl, { useNewUrlParser: true });
+  await mongoose.connect(dbUrl, opts);
 };
 
 const disconnect = async () => {

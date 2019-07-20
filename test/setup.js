@@ -9,7 +9,7 @@ module.exports = (dataFactory = null, fakeDataAmount = 10) => {
     mongoServer = new MongoMemoryServer();
     try {
       const connectionString = await mongoServer.getConnectionString();
-      await db.connect(connectionString);
+      await db.connect(connectionString, { useNewUrlParser: true, useFindAndModify: false });
       if (dataFactory) {
         await dataFactory(fakeDataAmount);
       }
