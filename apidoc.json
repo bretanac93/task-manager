@@ -1,0 +1,8 @@
+{
+  "name": "Lengoo API documentation",
+  "version": "1.0.0",
+  "description": "Lengoo task list manager",
+  "template": {
+      "forceLanguage": "en"
+  }
+}
