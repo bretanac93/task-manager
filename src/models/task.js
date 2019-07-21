@@ -33,6 +33,10 @@ const TaskSchema = new Schema(
       required: false,
       default: null,
     },
+    score: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true },
 );

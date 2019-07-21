@@ -26,7 +26,7 @@ async function findOne(req, res) {
 
 async function create(req, res) {
   const {
-    title, content, type, column,
+    title, content, type, column, score,
   } = req.body;
   try {
     const task = await taskRepository.create({
@@ -34,6 +34,7 @@ async function create(req, res) {
       content,
       type,
       column,
+      score,
     });
     return res.status(201).send({
       result: task,
@@ -46,7 +47,7 @@ async function create(req, res) {
 async function update(req, res) {
   const { id } = req.params;
   const {
-    title, content, type, column,
+    title, content, type, column, score,
   } = req.body;
 
   try {
@@ -55,6 +56,7 @@ async function update(req, res) {
       content,
       type,
       column,
+      score,
     });
     return res.send({
       result: task,

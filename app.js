@@ -1,18 +1,19 @@
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 
+const routes = require('./src/routes');
 const config = require('./src/config');
 const db = require('./src/lib/database');
 const debug = require('./src/lib/debugger');
-
-const routes = require('./src/routes');
 
 const app = express();
 
 express.Router();
 
-app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 if (config.appEnv !== 'test') {
   app.use(morgan('dev'));
@@ -25,11 +26,9 @@ app.use('/api', routes);
 app.use('/api-docs', express.static('docs/api'));
 app.use('/js-docs', express.static('docs/app'));
 
-
 module.exports = app;
 
 const server = app.listen(config.appPort, () => {
-  // debug('%O', config)
   debug('entrypoint', `Server running on port: ${config.appPort}`);
 });
 
