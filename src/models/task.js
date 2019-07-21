@@ -1,4 +1,9 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
+const slug = require('mongoose-slug-generator');
+
+mongoose.plugin(slug);
+
+const { Schema, model } = mongoose;
 
 const constants = require('../lib/constants');
 
@@ -16,6 +21,15 @@ const TaskSchema = new Schema(
       type: String,
       required: true,
       enum: constants.taskTypes,
+    },
+    slug: {
+      type: String,
+      slug: 'title',
+      unique: true,
+    },
+    column: {
+      type: Schema.Types.ObjectId,
+      ref: 'Column',
     },
   },
   { timestamps: true },

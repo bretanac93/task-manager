@@ -3,8 +3,10 @@ const { assert } = require('chai');
 const setup = require('../setup');
 const taskRepository = require('../../src/repositories/task');
 
+const dataFactory = require('../factories');
+
 describe('Validate tasks creation', () => {
-  setup();
+  setup(dataFactory, 10);
   it('should create a new task', async () => {
     try {
       const task = await taskRepository.create({
@@ -20,20 +22,20 @@ describe('Validate tasks creation', () => {
   it('should retrieve all the tasks', async () => {
     try {
       const tasks = await taskRepository.getAll();
-      assert.equal(tasks.length, 1);
+      assert.isAtLeast(tasks.length, 1);
     } catch (error) {
       assert.isNull(error);
     }
   });
-  it('should get first column', async () => {
+  it('should get last created task', async () => {
     try {
       const tasks = await taskRepository.getAll();
-      assert.equal(tasks[0].title, 'Frontend');
+      assert.equal(tasks[tasks.length - 1].title, 'Frontend');
     } catch (error) {
       assert.isNull(error);
     }
   });
-  it('should update the first column', async () => {
+  it('should update the first task', async () => {
     try {
       const tasks = await taskRepository.getAll();
       const { _id: id } = tasks[0];
@@ -43,14 +45,18 @@ describe('Validate tasks creation', () => {
       assert.isNull(error);
     }
   });
-  it('should remove the only element in the list', async () => {
+  it('should remove one task from the collection', async () => {
     try {
       let tasks = await taskRepository.getAll();
       const { _id: id } = tasks[0];
+
+      const lengthBefore = tasks.length;
+
       await taskRepository.remove(id);
       tasks = await taskRepository.getAll();
+      const lengthAfter = tasks.length;
 
-      assert.isEmpty(tasks);
+      assert.equal(lengthBefore - 1, lengthAfter);
     } catch (error) {
       assert.isNull(error);
     }
