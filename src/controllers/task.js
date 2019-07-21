@@ -1,10 +1,5 @@
+const { handleError } = require('./common');
 const taskRepository = require('../repositories/task');
-
-function handleError(res, err) {
-  return res.status(400).send({
-    message: err.message,
-  });
-}
 
 async function findAll(req, res) {
   try {
@@ -30,9 +25,16 @@ async function findOne(req, res) {
 }
 
 async function create(req, res) {
-  const { title, content, type } = req.body;
+  const {
+    title, content, type, column,
+  } = req.body;
   try {
-    const task = await taskRepository.create({ title, content, type });
+    const task = await taskRepository.create({
+      title,
+      content,
+      type,
+      column,
+    });
     return res.status(201).send({
       result: task,
     });
@@ -43,10 +45,17 @@ async function create(req, res) {
 
 async function update(req, res) {
   const { id } = req.params;
-  const { title, content, type } = req.body;
+  const {
+    title, content, type, column,
+  } = req.body;
 
   try {
-    const task = await taskRepository.update(id, { title, content, type });
+    const task = await taskRepository.update(id, {
+      title,
+      content,
+      type,
+      column,
+    });
     return res.send({
       result: task,
     });

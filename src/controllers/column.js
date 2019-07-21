@@ -1,10 +1,5 @@
+const { handleError } = require('./common');
 const columnRepository = require('../repositories/column');
-
-function handleError(res, err) {
-  return res.status(400).send({
-    message: err.message,
-  });
-}
 
 async function findAll(req, res) {
   try {
