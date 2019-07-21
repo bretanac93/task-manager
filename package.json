@@ -14,6 +14,7 @@
   "author": "bretanac@gmail.com",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "cors": "^2.8.5",
     "debug": "^4.1.1",
     "dotenv": "^8.0.0",
