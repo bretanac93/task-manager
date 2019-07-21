@@ -21,10 +21,10 @@ if (config.appEnv !== 'test') {
     .catch(err => debug('db', err.message));
 }
 
+app.use('/api', routes);
 app.use('/api-docs', express.static('docs/api'));
 app.use('/js-docs', express.static('docs/app'));
 
-app.use('/api', routes);
 
 module.exports = app;
 

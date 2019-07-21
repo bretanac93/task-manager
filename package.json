@@ -14,8 +14,6 @@
   "author": "aymen.labidi@lengoo.de",
   "license": "ISC",
   "dependencies": {
-    "@lengoo/logger": "^1.1.3",
-    "@lengoo/validator": "^1.0.0",
     "cors": "^2.8.5",
     "debug": "^4.1.1",
     "dotenv": "^8.0.0",
