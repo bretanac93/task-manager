@@ -30,6 +30,8 @@ const TaskSchema = new Schema(
     column: {
       type: Schema.Types.ObjectId,
       ref: 'Column',
+      required: false,
+      default: null,
     },
   },
   { timestamps: true },

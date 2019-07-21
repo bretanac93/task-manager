@@ -3,7 +3,7 @@ const slug = require('mongoose-slug-generator');
 
 mongoose.plugin(slug);
 
-const { Schema, model, Types } = mongoose;
+const { Schema, model } = mongoose;
 
 const ColumnSchema = new Schema(
   {
@@ -16,14 +16,14 @@ const ColumnSchema = new Schema(
       slug: 'title',
       unique: true,
     },
-    tasks: [{
-      type: Schema.Types.ObjectId,
-      ref: 'Task',
-    }],
   },
   {
     timestamps: true,
   },
 );
+
+ColumnSchema.post('remove', async function () {
+  await this.model('Task').updateMany({ column: this._id }, { column: null });
+});
 
 module.exports = model('Column', ColumnSchema);

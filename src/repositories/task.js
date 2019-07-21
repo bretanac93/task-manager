@@ -13,11 +13,11 @@ async function getOne(id) {
   return task.toObject();
 }
 
-async function create({ title, content, type }) {
-  if (!isValidType(type)) {
+async function create(obj) {
+  if (!isValidType(obj.type)) {
     throw new Error('Invalid type');
   }
-  const task = await Task.create({ title, content, type });
+  const task = await Task.create(obj);
   return task.toObject();
 }
 
@@ -33,10 +33,16 @@ async function remove(id) {
   return Task.findByIdAndDelete(id);
 }
 
+async function getByColumn(columnId) {
+  const tasks = await Task.find({ column: columnId });
+  return tasks;
+}
+
 module.exports = {
   getAll,
   getOne,
   create,
   update,
   remove,
+  getByColumn,
 };

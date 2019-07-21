@@ -1,17 +1,11 @@
-const express = require('express');
-const { exampleController } = require('../controllers');
+const { Router } = require('express');
 
-const router = express.Router();
+const tasksRouter = require('./task');
+const columnsRouter = require('./column');
 
-/**
- * @api {get} / Test Endpoint
- * @apiVersion 1.0.0
- * @apiName TestEndpoint
- * @apiGroup Test
- *
- * @apiSuccess {Boolean} success Status of the response.
- * @apiSuccess {String} message  Message of information.
- */
-router.get('/', exampleController.getAll);
+const router = Router();
+
+router.use('/tasks', tasksRouter);
+router.use('/columns', columnsRouter);
 
 module.exports = router;

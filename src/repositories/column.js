@@ -7,6 +7,9 @@ async function getAll() {
 
 async function getOne(id) {
   const column = await Column.findById(id);
+  if (!column) {
+    throw new Error('Column not found');
+  }
   return column.toObject();
 }
 

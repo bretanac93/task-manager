@@ -15,6 +15,7 @@ describe('Validate tasks creation', () => {
         type: 'bug',
       });
       assert.equal(task.title, 'Frontend');
+      assert.isNull(task.column);
     } catch (error) {
       assert.isNull(error);
     }
@@ -41,6 +42,7 @@ describe('Validate tasks creation', () => {
       const { _id: id } = tasks[0];
       const newTask = await taskRepository.update(id, { title: 'New Task' });
       assert.equal(newTask.title, 'New Task');
+      assert.isNotNull(newTask.content);
     } catch (error) {
       assert.isNull(error);
     }

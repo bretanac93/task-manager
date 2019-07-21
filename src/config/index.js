@@ -5,8 +5,8 @@ require('dotenv').config({
 });
 
 module.exports = {
-  dbUrl: process.env.DB_URL,
-  appEnv: process.env.NODE_ENV, // only production,development,test
+  dbUrl: process.env.DB_URL || 'mongodb://localhost/task_manager',
+  appEnv: process.env.NODE_ENV || 'development', // only production,development,test
   appName: process.env.APP_NAME,
   appPort: process.env.APP_PORT || 3000,
   appSecret: process.env.APP_SECRET || 'ChangeMe',
