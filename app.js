@@ -1,4 +1,5 @@
 const express = require('express');
+const morgan = require('morgan');
 
 const config = require('./src/config');
 const db = require('./src/lib/database');
@@ -14,11 +15,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 if (config.appEnv !== 'test') {
+  app.use(morgan('dev'));
   db.connect(config.dbUrl, { useNewUrlParser: true, useFindAndModify: false })
     .then(() => debug('db', 'Successfully connected to database'))
     .catch(err => debug('db', err.message));
 }
-
 
 app.use('/api-docs', express.static('docs/api'));
 app.use('/js-docs', express.static('docs/app'));
@@ -31,7 +32,6 @@ const server = app.listen(config.appPort, () => {
   // debug('%O', config)
   debug('entrypoint', `Server running on port: ${config.appPort}`);
 });
-
 
 // Graceful shutdown
 process.on('SIGTERM', () => {
