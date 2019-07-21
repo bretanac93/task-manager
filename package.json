@@ -11,7 +11,7 @@
     "test:api": "cross-env NODE_ENV=test mocha -t 15000 --exit test/integration/*.test.js"
   },
   "keywords": [],
-  "author": "aymen.labidi@lengoo.de",
+  "author": "bretanac@gmail.com",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
